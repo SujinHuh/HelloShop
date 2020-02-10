@@ -21,7 +21,6 @@ public abstract class Item {
     private Long id;
 
     //상속광계 맵핑
-
     private String name;
 
     private int price;
