@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE) //상속관맵핑 부무테이블에 맵핑 해줘야 함,싱글테이블 전략
 @DiscriminatorColumn(name = "dtype")
-@Getter
+@Getter @Setter
 public abstract class Item {
 
     @Id
