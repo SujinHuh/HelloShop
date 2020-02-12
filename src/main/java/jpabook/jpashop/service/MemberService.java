@@ -30,7 +30,7 @@ public class MemberService {
     private void validateDuplicateMember(Member member) {
         //Exception
         /**
-         *  멀티 쓰레드 상황을 고려해서 회원 테이블의 회원명 컬럼에 유니크 제 약 조건을 추가하는 것이 안전하다.
+         *  멀티 쓰레드 상황을 고려해서 회원 테이블의 회원명 컬럼에 유니크 제약 조건을 추가하는 것이 안전하다.
          */
         List<Member> findMembers = memberRepository.findByName(member.getName());
         if (!findMembers.isEmpty()) {
