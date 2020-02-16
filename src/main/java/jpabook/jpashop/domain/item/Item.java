@@ -15,6 +15,7 @@ import java.util.List;
 @Getter @Setter
 public abstract class Item {
 
+
     @Id
     @GeneratedValue
     @Column(name = "item_id")
@@ -50,6 +51,12 @@ public abstract class Item {
             throw new NotEnoughStockException("need more stock");
         }
         this.stockQuantity = restStock;
+    }
+
+    public void change( String name, int price, int stockQuantity) {
+        this.price = price;
+        this.name = name;
+        this.stockQuantity = stockQuantity;
     }
 
 }
