@@ -12,16 +12,15 @@ import static javax.persistence.FetchType.*;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // protected OrderItem{} 생성자 남용 방지
 public class OrderItem {
-
     @Id
     @GeneratedValue
     @Column(name = "order_item_id")
     private Long id;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "item_id ")
+    @JoinColumn(name = "item_id")
     private Item item;
 
     @ManyToOne(fetch = LAZY)
@@ -50,7 +49,7 @@ public class OrderItem {
     //==조회 로직==//
 
     /**
-     * 주문상품 전체가격 조회
+     * 주문상품 전체 가격 조회
      */
     public int getTotalPrice() {
         return getOrderPrice() * getCount();

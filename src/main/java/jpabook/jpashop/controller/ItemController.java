@@ -29,7 +29,7 @@ public class ItemController {
         return "items/createItemFrom";
     }
 
-    @PostMapping("items/new")
+    @PostMapping("/items/new")
     public String create(@Valid BookForm bookForm, BindingResult result) {
 
         if (result.hasErrors()) {
