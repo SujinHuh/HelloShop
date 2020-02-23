@@ -6,12 +6,11 @@ import lombok.Setter;
 import javax.validation.constraints.NotEmpty;
 
 @Getter @Setter
-public class BookForm {
-
+public class BookForm{
 
     private Long id;
 
-    @NotEmpty(message = "책 이름은 필수 입니다.")
+    @NotEmpty(message = "이름입력은 필수 입니다.")
     private String name;
     private int price;
     private int stockQuantity;

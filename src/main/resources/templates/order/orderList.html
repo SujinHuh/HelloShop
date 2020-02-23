@@ -1,6 +1,7 @@
 
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"> <head th:replace="fragments/header :: header"/> <body>
+<html xmlns:th="http://www.thymeleaf.org"> <head th:replace="fragments/header :: header"/>
+<body>
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
     <div> <div>
@@ -45,7 +46,10 @@
 </body>
 <script>
     function cancel(id) {
-        var form = document.createElement("form"); form.setAttribute("method", "post"); form.setAttribute("action", "/orders/" + id + "/cancel");document.body.appendChild(form);
+        var form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "/orders/" + id + "/cancel");
+        document.body.appendChild(form);
         form.submit();
     } </script>
 </html>
