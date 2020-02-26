@@ -1,20 +1,51 @@
 package jpabook.jpashop.api;
-
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.service.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
 public class MemberApiController {
 
     private final MemberService memberService;
+
+    @GetMapping("/api/v1/members")
+    public List<Member> MembersV1() {
+        return memberService.findMembers();//애플리케이션 직접 반환 안됨
+    }
+
+    @GetMapping("/api/v2/members")
+    public Result memberV2() {
+        List<Member> findMembers = memberService.findMembers();
+
+        List<MemberDTO> collect = findMembers.stream()
+                .map(member -> new MemberDTO(member.getName()))
+                .collect(Collectors.toList());
+
+        return new Result(collect.size(), collect);
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class Result<T> {
+        private int count;
+        private T data;
+
+    }
+    @Data
+    @AllArgsConstructor
+    static class MemberDTO {
+        private String name;
+    }
 
     @PostMapping("/api/v1/members")
     public CreateMemberResponse saveMemberV1(@RequestBody @Valid Member member) {
@@ -55,16 +86,17 @@ public class MemberApiController {
     }
 
     @Data
-    static class UpdateMemberRequest{
+    static class UpdateMemberRequest {
         private String name;
     }
 
     @Data
     @AllArgsConstructor
-    static class UpdateMemberResponse{
+    static class UpdateMemberResponse {
         private Long id;
         private String name;
     }
+
     @Data
     static class CreateMemberRequest {
         @NotEmpty
